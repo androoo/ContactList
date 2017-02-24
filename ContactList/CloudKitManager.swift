@@ -31,4 +31,18 @@ class CloudKitManager {
             completion(error)
         }
     }
+    
+    func subscriptToCreationOfRecords(withType type: String, completion: @escaping ((Error?) -> Void) = { _ in }) {
+        
+        let subscription = CKQuerySubscription(recordType: type, predicate: NSPredicate(value: true), options: .firesOnRecordCreation)
+        let notificationInfo = CKNotificationInfo()
+        notificationInfo.alertBody = "New contact created"
+        subscription.notificationInfo = notificationInfo
+        publicDatabase.save(subscription) { (_, error) in
+            if let error = error {
+                NSLog("\(error)")
+            }
+            completion(error)
+        }
+    }
 }

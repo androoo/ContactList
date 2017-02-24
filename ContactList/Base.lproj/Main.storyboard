@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5My-Aq-SzL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Contact List Table View Controller-->
+        <!--Title-->
         <scene sceneID="D8o-fU-Sah">
             <objects>
                 <tableViewController id="G1U-wk-gpy" customClass="ContactListTableViewController" customModule="ContactList" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,12 +19,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactCell" id="exf-cc-Okv">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactCell" textLabel="ed4-zm-9Uz" style="IBUITableViewCellStyleDefault" id="exf-cc-Okv">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="exf-cc-Okv" id="BSY-qz-Wmr">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ed4-zm-9Uz">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="KQT-gJ-myb" kind="show" identifier="toContactDetail" id="Exx-dP-457"/>
@@ -36,7 +45,13 @@
                             <outlet property="delegate" destination="G1U-wk-gpy" id="Q2l-zY-rxE"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="jhK-2a-U8f"/>
+                    <navigationItem key="navigationItem" title="Title" id="who-bR-xgc">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Avk-9a-aHV">
+                            <connections>
+                                <segue destination="KQT-gJ-myb" kind="show" identifier="addNewContact" id="oWO-KU-RT9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ha0-Gh-e3R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -131,12 +146,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="ava-4P-SWR">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="RoK-wy-7HI"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="RoK-wy-7HI">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="KQT-gJ-myb" id="7QD-zN-iZ0"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="emailTextField" destination="azc-ng-rmk" id="RMc-Fz-CTY"/>
+                        <outlet property="nameTextField" destination="wct-Yk-4YW" id="SEg-C0-Tjf"/>
+                        <outlet property="numberTextField" destination="Zyj-CG-1gP" id="JMN-2h-miz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mhJ-es-P1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1856.8" y="63.418290854572717"/>
+            <point key="canvasLocation" x="1948" y="64"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rYL-vP-40e">
@@ -157,4 +181,7 @@
             <point key="canvasLocation" x="136.80000000000001" y="64.31784107946028"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="oWO-KU-RT9"/>
+    </inferredMetricsTieBreakers>
 </document>

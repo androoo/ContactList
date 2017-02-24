@@ -17,6 +17,7 @@ struct Keys {
     //MARK: - Segue Identifiers 
     
     static let contactDetailSegue = "toContactDetail"
+    static let addContactSegue = "addNewContact"
     
     //MARK: - CloudKit Keys
     
