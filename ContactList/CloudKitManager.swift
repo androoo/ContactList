@@ -32,7 +32,7 @@ class CloudKitManager {
         }
     }
     
-    func subscriptToCreationOfRecords(withType type: String, completion: @escaping ((Error?) -> Void) = { _ in }) {
+    func subscribeToCreationOfRecords(withType type: String, completion: @escaping ((Error?) -> Void) = { _ in }) {
         
         let subscription = CKQuerySubscription(recordType: type, predicate: NSPredicate(value: true), options: .firesOnRecordCreation)
         let notificationInfo = CKNotificationInfo()

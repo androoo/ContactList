@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import CloudKit
 
 class ContactViewController: UIViewController {
     
     //MARK: - Properties
+    private let cloudKitManager = CloudKitManager()
     
     var contact: Contact? {
         didSet {
@@ -41,7 +43,25 @@ class ContactViewController: UIViewController {
     @IBAction func saveButtonTapped(_ sender: Any) {
         
         
-        
+        //check if contact has data
+        if let contact = self.contact {
+            //update the values
+            contact.cloudKitRecord.setValue(nameTextField.text, forKeyPath: Keys.nameKey)
+            contact.cloudKitRecord.setValue(numberTextField.text, forKeyPath: Keys.numberKey)
+            contact.cloudKitRecord.setValue(emailTextField.text, forKeyPath: Keys.emailKey)
+            
+            let record = contact.cloudKitRecord
+            
+            //save
+            cloudKitManager.save(record) { (error) in
+                if let error = error {
+                    NSLog(error.localizedDescription)
+                    return
+                }
+            }
+            dismiss(animated: true, completion: nil)
+            
+        } else {
         
         guard let name = nameTextField.text,
             let number = numberTextField.text,
@@ -49,19 +69,16 @@ class ContactViewController: UIViewController {
         let contact = Contact(name: name, number: number, email: email)
         ContactController.shared.create(contact: contact)
         let _ = navigationController?.popViewController(animated: true)
+            
+        }
     }
-    
-    
     
     //MARK: - Helper Methods 
     
     func updateViews() {
         guard let contact = contact else { return }
-        
-        print("have contact: \(contact.name)")
         nameTextField.text = contact.name
         numberTextField.text = contact.number
         emailTextField.text = contact.email
     }
-    
 }

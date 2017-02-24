@@ -17,7 +17,7 @@ class ContactController {
     
     private let cloudKitManager = CloudKitManager()
     
-    private(set) var contacts = [Contact]() {
+    var contacts = [Contact]() {
         didSet {
             DispatchQueue.main.async {
                 let notificationCenter = NotificationCenter.default
@@ -33,9 +33,9 @@ class ContactController {
     }
     
     
-    //MARK: - Public Methods
+    //MARK: - CRUD
     
-    // create
+    // Create
     
     func create(contact: Contact, completion: @escaping ((Error?) -> Void) = { _ in }) {
         let record = contact.cloudKitRecord
@@ -49,8 +49,7 @@ class ContactController {
         }
     }
     
-    
-    // refreshData
+    // RefreshData
     
     func refreshData(completion: @escaping ((Error?) -> Void) = { _ in }) {
         let sortDescriptors = [NSSortDescriptor(key: Keys.nameKey, ascending: false)]
@@ -64,11 +63,12 @@ class ContactController {
             self.contacts = records.flatMap{ Contact(cloudKitRecord: $0) }
         }
     }
+    
 
-    // subscribetopush
+    // Subscribe
     
     func subscribeToPushNotifications(completion: @escaping ((Error?) -> Void) = { _ in }) {
-        cloudKitManager.subscriptToCreationOfRecords(withType: Keys.contactRecordType) { (error) in
+        cloudKitManager.subscribeToCreationOfRecords(withType: Keys.contactRecordType) { (error) in
             if let error = error {
                 NSLog(error.localizedDescription)
             }

@@ -10,7 +10,7 @@ import Foundation
 
 struct Keys {
     
-    //MARK: - UITableViewCell Reuse Identifiers
+    //MARK: - Reuse Identifiers
     
     static let contactCellReuseIdentifier = "contactCell"
     

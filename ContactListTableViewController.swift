@@ -10,11 +10,14 @@ import UIKit
 
 class ContactListTableViewController: UITableViewController {
     
-    //MARK: - View Life
+    //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.reloadData()
+        title = "Contact List"
+        
+        //update & refresh
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(postsWereUpdated), name: Keys.DidRefreshNotificaiton, object: nil)
     }
@@ -34,11 +37,8 @@ class ContactListTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
+    // TODO: - implement deleting items
+
     
     //MARK: - Notification revieved
     func postsWereUpdated() {
